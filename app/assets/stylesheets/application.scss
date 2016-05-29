@@ -9,21 +9,25 @@ body {
 
 .navbar-brand {
   a {
-    color: #125688;
+    color: #fff;
   }
 }
 
 .navbar-default {
-  background-color: #fff;
+  background-color: #125688;
   height: 54px;
   .navbar-nav li a {
-    color: #125688;
+    color: #fff;
   }
 }
 
 .navbar-container {
-  width: 640px;
+  max-width: 640px;
   margin: 0 auto;
+}
+
+.navbar-collapse {
+  background: #125688;
 }
 
 .pictures-wrapper {
