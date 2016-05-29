@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature 'Users', type: :feature do
-  context 'user not signed in' do
-    it 'should see correct links' do
+  context 'logged in' do
+    it 'should display correct links' do
       visit root_path
       within 'header' do
         expect(page).to have_link 'Sign In'
@@ -12,7 +12,7 @@ RSpec.feature 'Users', type: :feature do
     end
   end
 
-  context 'user signed in' do
+  context 'logged out' do
     before do
       visit root_path
       click_link 'Sign Up'
@@ -22,7 +22,7 @@ RSpec.feature 'Users', type: :feature do
       click_button 'Sign up'
     end
 
-    it 'should see correct links' do
+    it 'should dislay correct links' do
       visit root_path
       within 'header' do
         expect(page).not_to have_link 'Sign In'

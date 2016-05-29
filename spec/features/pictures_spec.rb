@@ -11,17 +11,25 @@ RSpec.feature "Pictures", type: :feature do
       click_button 'Sign up'
     end
 
-    scenario 'no pictures have been added' do
-      visit '/pictures'
-      within 'p.notice' do
-        expect(page).to have_content 'No pictures available'
+    context 'no pictures have been added' do
+      it 'gives an error message' do
+        visit '/pictures'
+        within 'p.notice' do
+          expect(page).to have_content 'No pictures available'
+        end
+        expect(page).not_to have_css 'section.pictures'
       end
-      expect(page).not_to have_css 'section.pictures'
+    end
+
+    context 'adding a picture' do
+      'it saves the picture'
     end
   end
 
-  scenario 'not logged in' do
-    visit '/pictures'
-    expect(current_path).to eq new_user_session_path
+  context 'logged out' do
+    scenario 'redirects to login page' do
+      visit '/pictures'
+      expect(current_path).to eq new_user_session_path
+    end
   end
 end
