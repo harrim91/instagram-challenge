@@ -1,4 +1,5 @@
 - if @pictures.any?
   %section#pictures
-- else
-  %p.notice No pictures available
+    - @pictures.each do |picture|
+      = image_tag picture.image
+      = picture.description

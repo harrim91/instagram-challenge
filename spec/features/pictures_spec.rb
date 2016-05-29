@@ -31,8 +31,21 @@ RSpec.feature "Pictures", type: :feature do
         click_button 'Upload'
         expect(current_path).to eq '/pictures'
         within 'section#pictures' do
-          expect(page).to have_xpath("//img[@src=\"/public/images/smile.png\"]")
+          expect(page.find('img')['src']).to have_content 'smile.png'
           expect(page).to have_content 'This is a nice picture'
+        end
+      end
+
+      it 'raises an error if no image is submitted' do
+        visit '/pictures/new'
+        fill_in :Description, with: 'This is a nice picture'
+        click_button 'Upload'
+        within 'p.notice' do
+          expect(page).to have_content 'There were errors uploading the picture'
+        end
+        within 'form' do
+          expect(page).to have_css 'input#picture_image'
+          expect(page).to have_css 'input#picture_description'
         end
       end
     end
