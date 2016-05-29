@@ -22,7 +22,19 @@ RSpec.feature "Pictures", type: :feature do
     end
 
     context 'adding a picture' do
-      'it saves the picture'
+      'it saves the picture' do
+        visit '/pictures'
+        click_button 'Add Picture'
+        expect(current_path).to eq 'pictures/new'
+        #select a picture
+        fill_in :Description, with: 'This is a nice picture'
+        click_button 'Upload'
+        expect(current_path).to eq 'pictures'
+        within 'section.pictures' do
+          # expect(page).to have_picture '[picture]'
+          expect(page).to have_content 'This is a nice picture'
+        end
+      end
     end
   end
 
