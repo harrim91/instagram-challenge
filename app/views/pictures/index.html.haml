@@ -1,1 +1,4 @@
-%p.notice No pictures available
+- if @pictures.any?
+  %section#pictures
+- else
+  %p.notice No pictures available

@@ -17,21 +17,21 @@ RSpec.feature "Pictures", type: :feature do
         within 'p.notice' do
           expect(page).to have_content 'No pictures available'
         end
-        expect(page).not_to have_css 'section.pictures'
+        expect(page).not_to have_css 'section#pictures'
       end
     end
 
     context 'adding a picture' do
-      'it saves the picture' do
+      it 'saves the picture' do
         visit '/pictures'
-        click_button 'Add Picture'
-        expect(current_path).to eq 'pictures/new'
-        #select a picture
+        click_link 'Add Picture'
+        expect(current_path).to eq '/pictures/new'
+        attach_file 'Image', "#{Rails.root}/spec/assets/images/smile.png"
         fill_in :Description, with: 'This is a nice picture'
         click_button 'Upload'
-        expect(current_path).to eq 'pictures'
-        within 'section.pictures' do
-          # expect(page).to have_picture '[picture]'
+        expect(current_path).to eq '/pictures'
+        within 'section#pictures' do
+          expect(page).to have_xpath("//img[@src=\"/public/images/smile.png\"]")
           expect(page).to have_content 'This is a nice picture'
         end
       end
@@ -42,6 +42,10 @@ RSpec.feature "Pictures", type: :feature do
     scenario 'redirects to login page' do
       visit '/pictures'
       expect(current_path).to eq new_user_session_path
+    end
+    scenario 'cannot add a picture' do
+      visit '/pictures'
+      expect(page).not_to have_content 'Add Picture'
     end
   end
 end
