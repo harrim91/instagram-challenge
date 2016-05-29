@@ -1,8 +1,11 @@
 .pictures-wrapper.row
   .picture
+    .picture-head
+      .name= @picture.user.user_name
     .image.center-block= image_tag @picture.image.url(:medium), class: 'img-responsive', alt: @picture.description
     %p.description= @picture.description
     .text-center.edit-links
-      = link_to 'Edit', edit_picture_path(@picture)
-      |
+      - if current_user == @picture.user
+        = link_to 'Edit', edit_picture_path(@picture)
+        |
       = link_to 'Back', pictures_path

@@ -1,6 +1,6 @@
 - if @pictures.any?
   .pictures-wrapper.row
     -@pictures.each do |picture|
-      .picture.col-sm-12.col-md-3.thumbnail
+      .picture.col-sm-12.col-md-4.thumbnail
         .image.center-block= link_to(image_tag(picture.image.url(:thumbnail), class: 'img-responsive', alt: picture.description), picture_path(picture))
         %p.description= picture.description

@@ -48,15 +48,10 @@ body {
 }
 
 .picture-head {
-  height: 64px;
-  padding: 14px 20px;
+  padding: 14px 5px;
   color: #125688;
   font-size: 15px;
-  line-height: 18px;
-  .thumbnail {}
-  .name {
-    display: block;
-  }
+  font-weight: bold;
 }
 
 .image {

@@ -4,32 +4,37 @@ class PicturesController < ApplicationController
 
   def index
     @pictures = Picture.all
-    flash[:notice] = 'No pictures available' if @pictures.empty?
+    flash.now[:notice] = 'No pictures available' if @pictures.empty?
   end
 
   def show
   end
 
   def new
+    # @picture = current_user.pictures.build picture_params
   end
 
   def edit
+    unless current_user == @picture.user
+      flash[:alert] = 'Only the picture owner can edit'
+      redirect_to pictures_path
+    end
   end
 
   def create
-    @picture = Picture.create(picture_params)
+    @picture = current_user.pictures.build picture_params
 
     if @picture.save
       redirect_to pictures_path
     else
-      flash[:alert] = 'There were errors uploading the picture'
+      flash.now[:alert] = 'There were errors uploading the picture'
       render 'new'
     end
   end
 
   def update
     @picture.update picture_params
-    redirect_to picture_path(@picture)
+    redirect_to picture_path @picture
   end
 
   def destroy
@@ -43,6 +48,6 @@ class PicturesController < ApplicationController
   end
 
   def set_picture
-    @picture = Picture.find(params[:id])
+    @picture = Picture.find params[:id]
   end
 end

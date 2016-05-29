@@ -96,6 +96,22 @@ RSpec.feature "Pictures", type: :feature do
           expect(page).not_to have_css 'div.pictures-wrapper'
         end
       end
+
+      it 'only allows the poster to edit or delete' do
+        click_link 'Sign Out'
+        click_link 'Sign Up'
+        fill_in :Email, with: 'test2@example.com'
+        fill_in :'User name', with: 'Michael2'
+        fill_in :Password, with: 'testtest'
+        fill_in :'Password confirmation', with: 'testtest'
+        click_button 'Sign up'
+        picture = Picture.last
+        visit picture_path(picture)
+        expect(page).not_to have_content 'Edit'
+        visit edit_picture_path(picture)
+        expect(current_path).to eq pictures_path
+        expect(page).to have_content 'Only the picture owner can edit'
+      end
     end
   end
 
