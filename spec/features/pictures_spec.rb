@@ -64,6 +64,23 @@ RSpec.feature "Pictures", type: :feature do
         end
       end
     end
+
+    context 'editing a picture' do
+      it 'can update the description' do
+        visit '/pictures/new'
+        attach_file 'Image', "#{Rails.root}/spec/assets/images/smile.png"
+        fill_in :Description, with: 'This is a picture'
+        click_button 'Upload'
+        picture = Picture.last
+        visit picture_path(picture)
+        click_link 'Edit'
+        expect(current_path).to eq edit_picture_path(picture)
+        fill_in :Description, with: 'New description'
+        click_button 'Update Description'
+        expect(current_path).to eq picture_path(picture)
+        expect(page).to have_content 'New description'
+      end
+    end
   end
 
   context 'logged out' do

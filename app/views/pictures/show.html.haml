@@ -2,3 +2,4 @@
   .picture
     .image.center-block= image_tag @picture.image.url(:medium), class: 'img-responsive', alt: @picture.description
     %p.description= @picture.description
+    = link_to 'Edit', edit_picture_path(@picture)
