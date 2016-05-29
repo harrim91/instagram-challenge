@@ -50,35 +50,50 @@ RSpec.feature "Pictures", type: :feature do
       end
     end
 
-    context 'viewing a picture' do
-      it 'shows the picture' do
+    context 'a picture has been added' do
+      before do
         visit '/pictures/new'
         attach_file 'Image', "#{Rails.root}/spec/assets/images/smile.png"
         fill_in :Description, with: 'This is a picture'
         click_button 'Upload'
-        within('div.pictures-wrapper') { click_link page.find('img')['alt="This is a picture"'] }
-        expect(current_path).to eq picture_path(Picture.last)
-        within 'div.pictures-wrapper' do
-          expect(page.find('img')['src']).to have_content 'smile.png'
-          expect(page).to have_content 'This is a picture'
+      end
+
+      context 'viewing a picture' do
+        it 'shows the picture' do
+          within('div.pictures-wrapper') { click_link page.find('img')['alt="This is a picture"'] }
+          expect(current_path).to eq picture_path(Picture.last)
+          within 'div.pictures-wrapper' do
+            expect(page.find('img')['src']).to have_content 'smile.png'
+            expect(page).to have_content 'This is a picture'
+          end
         end
       end
-    end
 
-    context 'editing a picture' do
-      it 'can update the description' do
-        visit '/pictures/new'
-        attach_file 'Image', "#{Rails.root}/spec/assets/images/smile.png"
-        fill_in :Description, with: 'This is a picture'
-        click_button 'Upload'
-        picture = Picture.last
-        visit picture_path(picture)
-        click_link 'Edit'
-        expect(current_path).to eq edit_picture_path(picture)
-        fill_in :Description, with: 'New description'
-        click_button 'Update Description'
-        expect(current_path).to eq picture_path(picture)
-        expect(page).to have_content 'New description'
+      context 'editing a picture' do
+        it 'can update the description' do
+          picture = Picture.last
+          visit picture_path(picture)
+          click_link 'Edit'
+          expect(current_path).to eq edit_picture_path(picture)
+          fill_in :Description, with: 'New description'
+          click_button 'Update Description'
+          expect(current_path).to eq picture_path(picture)
+          expect(page).to have_content 'New description'
+        end
+      end
+
+      context 'deleting a picture' do
+        it 'removes the picture' do
+          picture = Picture.last
+          visit picture_path(picture)
+          click_link 'Edit'
+          click_link 'Delete'
+          expect(current_path).to eq pictures_path
+          within 'p.notice' do
+            expect(page).to have_content 'No pictures available'
+          end
+          expect(page).not_to have_css 'div.pictures-wrapper'
+        end
       end
     end
   end
