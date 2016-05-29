@@ -14,7 +14,7 @@ RSpec.feature "Pictures", type: :feature do
     context 'no pictures have been added' do
       it 'gives an error message' do
         visit '/pictures'
-        within 'p.notice' do
+        within 'div.flash-messages' do
           expect(page).to have_content 'No pictures available'
         end
         expect(page).not_to have_css 'div.pictures-wrapper'
@@ -40,7 +40,7 @@ RSpec.feature "Pictures", type: :feature do
         visit '/pictures/new'
         fill_in :Description, with: 'This is a nice picture'
         click_button 'Upload'
-        within 'p.notice' do
+        within 'div.flash-messages' do
           expect(page).to have_content 'There were errors uploading the picture'
         end
         within 'form' do
@@ -89,7 +89,7 @@ RSpec.feature "Pictures", type: :feature do
           click_link 'Edit'
           click_link 'Delete'
           expect(current_path).to eq pictures_path
-          within 'p.notice' do
+          within 'div.flash-messages' do
             expect(page).to have_content 'No pictures available'
           end
           expect(page).not_to have_css 'div.pictures-wrapper'

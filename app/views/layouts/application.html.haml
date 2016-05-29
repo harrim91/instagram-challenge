@@ -7,7 +7,7 @@
     = csrf_meta_tags
   %body
     = render 'shared/navigation'
-    .container
+    .container.flash-messages
       -flash.each do |name, msg|
         = content_tag :div, msg, class: [:alert, alert_for(name)]
     = yield
