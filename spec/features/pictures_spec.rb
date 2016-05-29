@@ -49,6 +49,21 @@ RSpec.feature "Pictures", type: :feature do
         end
       end
     end
+
+    context 'viewing a picture' do
+      it 'shows the picture' do
+        visit '/pictures/new'
+        attach_file 'Image', "#{Rails.root}/spec/assets/images/smile.png"
+        fill_in :Description, with: 'This is a picture'
+        click_button 'Upload'
+        within('div.pictures-wrapper') { click_link page.find('img')['alt="This is a picture"'] }
+        expect(current_path).to eq picture_path(Picture.last)
+        within 'div.pictures-wrapper' do
+          expect(page.find('img')['src']).to have_content 'smile.png'
+          expect(page).to have_content 'This is a picture'
+        end
+      end
+    end
   end
 
   context 'logged out' do

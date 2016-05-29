@@ -5,6 +5,10 @@ class PicturesController < ApplicationController
     flash[:notice] = 'No pictures available' if @pictures.empty?
   end
 
+  def show
+    @picture = Picture.find params[:id]
+  end
+
   def new
   end
 

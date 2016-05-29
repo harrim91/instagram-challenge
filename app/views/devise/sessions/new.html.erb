@@ -1,4 +1,4 @@
-<div class="form-wrapper row">
+<div class="form-wrapper text-center row">
   <h2>Log in</h2>
   <%= form_for(resource, as: resource_name, class: 'form-horizontal', url: session_path(resource_name)) do |f| %>
     <div class="form-group">
@@ -19,7 +19,7 @@
     <% end -%>
 
     <div class="form-group">
-      <%= f.submit "Log in" %>
+      <%= f.submit "Log in", class: 'btn-success' %>
     </div>
   <% end %>
 

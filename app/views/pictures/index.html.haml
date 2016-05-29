@@ -2,5 +2,5 @@
   .pictures-wrapper.row
     -@pictures.each do |picture|
       .picture
-        .image.center-block= image_tag picture.image.url(:medium), class:'img-responsive'
+        .image.center-block= link_to(image_tag(picture.image.url(:medium), class: 'img-responsive', alt: picture.description), picture_path(picture))
         %p.description= picture.description

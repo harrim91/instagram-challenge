@@ -8,6 +8,6 @@
   %body
     = render 'shared/navigation'
     - if notice || alert
-      %p.notice= notice
-      %p.alert= alert
+      %p.notice.text-center= notice
+      %p.alert.text-center= alert
     = yield

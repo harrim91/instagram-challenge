@@ -1,0 +1,4 @@
+.pictures-wrapper.row
+  .picture
+    .image.center-block= image_tag @picture.image.url(:medium), class: 'img-responsive', alt: @picture.description
+    %p.description= @picture.description
