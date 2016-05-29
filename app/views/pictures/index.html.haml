@@ -1,5 +1,6 @@
 - if @pictures.any?
-  %section#pictures
-    - @pictures.each do |picture|
-      = image_tag picture.image.url(:medium)
-      = picture.description
+  .pictures-wrapper.row
+    -@pictures.each do |picture|
+      .picture
+        .image.center-block= image_tag picture.image.url(:medium), class:'img-responsive'
+        %p.description= picture.description

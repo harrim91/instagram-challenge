@@ -17,7 +17,7 @@ RSpec.feature "Pictures", type: :feature do
         within 'p.notice' do
           expect(page).to have_content 'No pictures available'
         end
-        expect(page).not_to have_css 'section#pictures'
+        expect(page).not_to have_css 'div.pictures-wrapper'
       end
     end
 
@@ -27,12 +27,12 @@ RSpec.feature "Pictures", type: :feature do
         click_link 'Add Picture'
         expect(current_path).to eq '/pictures/new'
         attach_file 'Image', "#{Rails.root}/spec/assets/images/smile.png"
-        fill_in :Description, with: 'This is a nice picture'
+        fill_in :Description, with: 'This is a picture'
         click_button 'Upload'
         expect(current_path).to eq '/pictures'
-        within 'section#pictures' do
+        within 'div.pictures-wrapper' do
           expect(page.find('img')['src']).to have_content 'smile.png'
-          expect(page).to have_content 'This is a nice picture'
+          expect(page).to have_content 'This is a picture'
         end
       end
 

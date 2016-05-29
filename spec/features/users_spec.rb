@@ -4,7 +4,7 @@ RSpec.feature 'Users', type: :feature do
   context 'logged in' do
     it 'should display correct links' do
       visit root_path
-      within 'header' do
+      within 'nav' do
         expect(page).to have_link 'Sign In'
         expect(page).to have_link 'Sign Up'
         expect(page).not_to have_link 'Sign Out'
@@ -24,7 +24,7 @@ RSpec.feature 'Users', type: :feature do
 
     it 'should dislay correct links' do
       visit root_path
-      within 'header' do
+      within 'nav' do
         expect(page).not_to have_link 'Sign In'
         expect(page).not_to have_link 'Sign Up'
         expect(page).to have_link 'Sign Out'

@@ -1,8 +1,10 @@
-= form_for :picture, url: pictures_path do |f|
-  = f.label :image
-  = f.file_field :image
-
-  = f.label :description
-  = f.text_field :description
-
-  = f.submit 'Upload'
+.form-wrapper.row
+  = form_for :picture, class: 'form-horizontal' ,url: pictures_path do |f|
+    .form-group
+      = f.label :image
+      = f.file_field :image
+    .form-group
+      = f.label :description
+      = f.text_field :description
+    .form-group
+      = f.submit 'Upload'
