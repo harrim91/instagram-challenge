@@ -6,6 +6,7 @@ RSpec.feature "Pictures", type: :feature do
       visit root_path
       click_link 'Sign Up'
       fill_in :Email, with: 'test@example.com'
+      fill_in :'User name', with: 'Michael'
       fill_in :Password, with: 'testtest'
       fill_in :'Password confirmation', with: 'testtest'
       click_button 'Sign up'
@@ -99,9 +100,9 @@ RSpec.feature "Pictures", type: :feature do
   end
 
   context 'logged out' do
-    scenario 'redirects to login page' do
+    scenario 'renders the login page' do
       visit '/pictures'
-      expect(current_path).to eq new_user_session_path
+      expect(page).to have_content 'You need to sign in or sign up before continuing'
     end
     scenario 'cannot add a picture' do
       visit '/pictures'

@@ -1,5 +1,5 @@
 class PicturesController < ApplicationController
-  before_action { redirect_to new_user_session_path unless user_signed_in? }
+  before_action :authenticate_user!
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
 
   def index

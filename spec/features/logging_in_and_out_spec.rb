@@ -17,6 +17,7 @@ RSpec.feature 'Logging In an Out', type: :feature do
       visit root_path
       click_link 'Sign Up'
       fill_in :Email, with: 'test@example.com'
+      fill_in :'User name', with: 'Michael'
       fill_in :Password, with: 'testtest'
       fill_in :'Password confirmation', with: 'testtest'
       click_button 'Sign up'
