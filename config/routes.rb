@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   resources :pictures do
     resources :comments
     member do
-      post "like", to: "votes#like"
-      delete "unlike", to: "votes#unlike"
+      post "like", to: "likes#like"
+      delete "unlike", to: "likes#unlike"
     end
   end
 end
