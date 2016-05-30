@@ -2,8 +2,29 @@
   .picture
     .picture-head
       = link_to @picture.user.user_name, user_path(@picture.user), class: 'name'
+
     .image.center-block= image_tag @picture.image.url(:medium), class: 'img-responsive', alt: @picture.description
+
     %p.description= @picture.description
+
+    - if @picture.comments.any?
+      .comments-wrapper.row
+        - @picture.comments.each do |comment|
+          .comment
+            .user-name
+              = comment.user.user_name
+            .comment-content
+              = comment.content
+            - if comment.user == current_user
+              = link_to 'delete', picture_comment_path(@picture, comment), method: :delete
+
+
+    .comment-form
+      = form_for [@picture, @picture.comments.build] do |f|
+        = f.text_field :content, placeholder: 'Add a comment...'
+        = f.hidden_field :user_id, value: current_user.id
+        = f.submit 'Add Comment'
+
     .text-center.edit-links
       - if current_user == @picture.user
         = link_to 'Edit', edit_picture_path(@picture)
