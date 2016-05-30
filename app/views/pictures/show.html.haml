@@ -1,7 +1,7 @@
 .pictures-wrapper.row
   .picture
     .picture-head
-      .name= @picture.user.user_name
+      = link_to @picture.user.user_name, user_path(@picture.user), class: 'name'
     .image.center-block= image_tag @picture.image.url(:medium), class: 'img-responsive', alt: @picture.description
     %p.description= @picture.description
     .text-center.edit-links

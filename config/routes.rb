@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root 'pictures#index'
-  get 'user/:id' => 'users#show'
+  get 'user/:id', to: 'users#show', as: 'user'
   devise_for :users, controllers: { registrations: 'registrations' }
   resources :pictures
 

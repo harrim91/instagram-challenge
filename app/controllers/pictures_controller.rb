@@ -1,6 +1,7 @@
 class PicturesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
+  before_action :check_if_owner, only: [:edit, :update, :destroy]
 
   def index
     @pictures = Picture.all
@@ -11,14 +12,9 @@ class PicturesController < ApplicationController
   end
 
   def new
-    # @picture = current_user.pictures.build picture_params
   end
 
   def edit
-    unless current_user == @picture.user
-      flash[:alert] = 'Only the picture owner can edit'
-      redirect_to pictures_path
-    end
   end
 
   def create
@@ -49,5 +45,12 @@ class PicturesController < ApplicationController
 
   def set_picture
     @picture = Picture.find params[:id]
+  end
+
+  def check_if_owner
+    unless current_user == @picture.user
+      flash[:alert] = 'Only the picture owner can edit'
+      redirect_to pictures_path
+    end
   end
 end
