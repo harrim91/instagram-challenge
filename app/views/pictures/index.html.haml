@@ -7,4 +7,4 @@
         .picture-bottom
           .description
             .description-content
-              = picture.description
+              = picture.description.length > 20 ? "#{picture.description[0,20]}..." : picture.description
