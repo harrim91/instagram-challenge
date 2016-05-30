@@ -25,10 +25,10 @@ RSpec.feature "Comments", type: :feature do
 
   context 'adding a comment' do
     it 'adds the comment to the picture' do
-      fill_in :'comment_content', with: 'This is a comment'
-      click_button 'Add Comment'
+      fill_in "comment_content_#{Picture.last.id}", with: 'This is a comment'
+      click_button 'Add'
       expect(current_path).to eq picture_path(Picture.last)
-      within 'div.comment' do
+      within 'div.comments' do
         expect(page).to have_content User.last.user_name
         expect(page).to have_content 'This is a comment'
       end
@@ -37,18 +37,18 @@ RSpec.feature "Comments", type: :feature do
 
   context 'deleting a comment' do
     it 'can be removed by the comment owner' do
-      fill_in :'comment_content', with: 'This is a comment'
-      click_button 'Add Comment'
-      within 'div.comment' do
-        click_link 'delete'
+      fill_in "comment_content_#{Picture.last.id}", with: 'This is a comment'
+      click_button 'Add'
+      within 'div.comments' do
+        click_link "delete_comment_#{Comment.last.id}"
       end
       expect(current_path).to eq picture_path(Picture.last)
       expect(page).not_to have_css 'div.comment'
     end
 
     it 'can only be removed by the comment owner' do
-      fill_in :'comment_content', with: 'This is a comment'
-      click_button 'Add Comment'
+      fill_in "comment_content_#{Picture.last.id}", with: 'This is a comment'
+      click_button 'Add'
       click_link 'Sign Out'
       visit root_path
       click_link 'Sign Up'
@@ -58,9 +58,9 @@ RSpec.feature "Comments", type: :feature do
       fill_in :'Password confirmation', with: 'testtest'
       click_button 'Sign up'
       visit picture_path(Picture.last)
-      within 'div.comment' do
+      within 'div.comments' do
         expect(page).to have_content 'This is a comment'
-        expect(page).not_to have_content 'delete'
+        expect(page).not_to have_css "delete_comment_#{Comment.last.id}"
       end
     end
   end

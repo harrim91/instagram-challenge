@@ -7,12 +7,18 @@ class CommentsController < ApplicationController
   def create
     @comment = @picture.comments.build(comment_params)
     @comment.save
-    redirect_to picture_path @picture
+    respond_to do |format|
+      format.html { redirect_to picture_path @picture }
+      format.js
+    end
   end
 
   def destroy
     @comment.destroy
-    redirect_to picture_path @picture
+    respond_to do |format|
+      format.html { redirect_to picture_path @picture }
+      format.js
+    end
   end
 
   private

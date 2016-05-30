@@ -3,6 +3,8 @@
     .picture-head
       .user-name
         = link_to @picture.user.user_name, user_path(@picture.user)
+      .time-ago
+        = time_ago_in_words @picture.created_at
 
     .image.center-block= image_tag @picture.image.url(:medium), class: 'img-responsive', alt: @picture.description
 
@@ -13,26 +15,20 @@
         .description-content
           = @picture.description
 
-      - if @picture.comments.any?
-        - @picture.comments.each do |comment|
-          .comment
-            .user-name
-              = link_to @picture.user.user_name, user_path(@picture.user)
-            .comment-content
-              = comment.content
-            - if comment.user == current_user
-              = link_to picture_comment_path(@picture, comment), method: :delete do
-                %span(class="glyphicon glyphicon-remove delete-comment")
+      .comments{id: "comments_#{@picture.id}"}
+        - if @picture.comments.any?
+          = render @picture.comments, picture: @picture
 
 
     .comment-like-form.row
       .like-button.col-sm-1
         %span(class="glyphicon glyphicon-heart-empty")
       .comment-form.col-sm-11
-        = form_for [@picture, @picture.comments.build] do |f|
-          = f.text_field :content, placeholder: 'Add a comment...'
-          = f.hidden_field :user_id, value: current_user.id
-          = f.submit 'Add Comment'
+        = form_for [@picture, @picture.comments.build], remote: true do |f|
+          .input-group
+            = f.text_field :content, placeholder: 'Add a comment...', class: 'comment_content form-control', id: "comment_content_#{@picture.id}"
+            = f.hidden_field :user_id, value: current_user.id
+            %span.input-group-btn #{f.button 'Add', type: :submit, class: 'btn btn-secondary'}
 
     .text-center.edit-links
       - if current_user == @picture.user

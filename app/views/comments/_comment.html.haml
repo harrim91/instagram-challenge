@@ -1,0 +1,8 @@
+.comment
+  .user-name
+    = link_to comment.user.user_name, user_path(comment.user)
+  .comment-content
+    = comment.content
+  - if comment.user == current_user
+    = link_to picture_comment_path(picture, comment), method: :delete, remote: true, id: "delete_comment_#{comment.id}" do
+      %span(class="glyphicon glyphicon-remove delete-comment")
