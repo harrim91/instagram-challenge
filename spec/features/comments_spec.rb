@@ -19,7 +19,7 @@ RSpec.feature "Comments", type: :feature do
 
   context 'no comments have been added' do
     it 'has no comments section' do
-      expect(page).not_to have_css 'div.comments-wrapper'
+      expect(page).not_to have_css 'div.comment'
     end
   end
 
@@ -28,7 +28,7 @@ RSpec.feature "Comments", type: :feature do
       fill_in :'comment_content', with: 'This is a comment'
       click_button 'Add Comment'
       expect(current_path).to eq picture_path(Picture.last)
-      within 'div.comments-wrapper' do
+      within 'div.comment' do
         expect(page).to have_content User.last.user_name
         expect(page).to have_content 'This is a comment'
       end
@@ -39,11 +39,11 @@ RSpec.feature "Comments", type: :feature do
     it 'can be removed by the comment owner' do
       fill_in :'comment_content', with: 'This is a comment'
       click_button 'Add Comment'
-      within 'div.comments-wrapper' do
+      within 'div.comment' do
         click_link 'delete'
       end
       expect(current_path).to eq picture_path(Picture.last)
-      expect(page).not_to have_css 'div.comments-wrapper'
+      expect(page).not_to have_css 'div.comment'
     end
 
     it 'can only be removed by the comment owner' do
@@ -58,7 +58,7 @@ RSpec.feature "Comments", type: :feature do
       fill_in :'Password confirmation', with: 'testtest'
       click_button 'Sign up'
       visit picture_path(Picture.last)
-      within 'div.comments-wrapper' do
+      within 'div.comment' do
         expect(page).to have_content 'This is a comment'
         expect(page).not_to have_content 'delete'
       end
