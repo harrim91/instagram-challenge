@@ -1,0 +1,6 @@
+- if current_user.voted_for? picture
+  = link_to unlike_picture_path(picture), id: 'unlike-button', remote: true, method: :delete do
+    %span(class="glyphicon glyphicon-star")
+- else
+  = link_to like_picture_path(picture), id: 'like-button', remote: true, method: :post do
+    %span(class="glyphicon glyphicon-star-empty")

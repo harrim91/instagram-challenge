@@ -5,5 +5,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
   resources :pictures do
     resources :comments
+    member do
+      post "like", to: "votes#like"
+      delete "unlike", to: "votes#unlike"
+    end
   end
 end

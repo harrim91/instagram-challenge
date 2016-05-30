@@ -82,8 +82,11 @@ body {
     color: #125688;
     font-size: 15px;
   }
-  .user-name, .description-content {
+  .user-name, .description-content, .like-count {
     display: inline;
+  }
+  .like-count {
+    float: right;
   }
   .comment {
     margin-top: 7px;

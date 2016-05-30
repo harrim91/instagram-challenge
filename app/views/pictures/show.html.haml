@@ -14,6 +14,8 @@
           = link_to @picture.user.user_name, user_path(@picture.user)
         .description-content
           = @picture.description
+        .like-count
+          = render 'votes/like_count', picture: @picture
 
       .comments{id: "comments_#{@picture.id}"}
         - if @picture.comments.any?
@@ -22,7 +24,7 @@
 
     .comment-like-form.row
       .like-button.col-sm-1
-        %span(class="glyphicon glyphicon-heart-empty")
+        = render 'votes/like_button', picture: @picture
       .comment-form.col-sm-11
         = form_for [@picture, @picture.comments.build], remote: true do |f|
           .input-group
