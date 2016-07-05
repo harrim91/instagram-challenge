@@ -20,7 +20,7 @@ Requests to add and delete comments are made using ajax, and the comment section
 Users have a profile page, accessible via the navigation bar, or by a link on any image or comment posted by them.
 This shows all images that the specific user has posted.
 
-Users can like and unlike images. This functionality uses the acts_as_votable gem.
+Users can like and unlike images. This functionality uses the [acts_as_votable](https://github.com/ryanto/acts_as_votable) gem.
 
 Views are written in haml and styled using Bootstrap.
 
