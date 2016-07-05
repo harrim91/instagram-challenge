@@ -7,12 +7,12 @@ Build an Instagram clone using Rails.
 [![Build Status](https://travis-ci.org/harrim91/instagram-challenge.svg?branch=master)](https://travis-ci.org/harrim91/instagram-challenge)
 [![Coverage Status](https://coveralls.io/repos/github/harrim91/instagram-challenge/badge.svg?branch=master)](https://coveralls.io/github/harrim91/instagram-challenge?branch=master)
 
-Users can create an account, sign in and log out (using Devise)
-Users must be logged in to access any functionality.
-Users can perform CRUD actions on photos.
-Photos can only be edited or deleted by their owners.
-Photos are uploaded using paperclip and stored on AWS.
-On upload, photos are resized, and a thumbnail is made, using ImageMagick.
+Users can create an account, sign in and log out (using [Devise](https://github.com/plataformatec/devise))  
+Users must be logged in to access any functionality.  
+Users can perform CRUD actions on photos.  
+Photos can only be edited or deleted by their owners.  
+Photos are uploaded using [paperclip](https://github.com/thoughtbot/paperclip) and stored on AWS.  
+On upload, photos are resized and a thumbnail is made using [ImageMagick](http://www.imagemagick.org/script/index.php).  
 
 Users can comment on any photo. Only the comment owner can delete the comment.
 Requests to add and delete comments are made using ajax, and the comment section is re-rendered using jquery, so the page does not have to be reloaded.
