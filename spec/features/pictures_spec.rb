@@ -33,7 +33,7 @@ RSpec.feature "Pictures", type: :feature do
         expect(current_path).to eq '/pictures'
         within 'div.pictures-wrapper' do
           expect(page.find('img')['src']).to have_content 'smile.png'
-          expect(page).to have_content 'This is a picture'
+          expect(page).to have_content 'This is a pictu...'
         end
       end
 

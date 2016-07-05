@@ -72,6 +72,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
+    colorize (0.7.7)
     concurrent-ruby (1.0.2)
     debug_inspector (0.0.2)
     devise (4.1.1)
@@ -154,6 +155,8 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails_cleaner (0.0.6)
+      colorize
     railties (4.2.6)
       actionpack (= 4.2.6)
       activesupport (= 4.2.6)
@@ -240,6 +243,7 @@ DEPENDENCIES
   paperclip
   pg (~> 0.15)
   rails (= 4.2.6)
+  rails_cleaner (~> 0.0.6)
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
@@ -252,4 +256,4 @@ RUBY VERSION
    ruby 2.3.0p0
 
 BUNDLED WITH
-   1.12.2
+   1.12.5

@@ -29,6 +29,7 @@ gem 'devise'
 gem 'paperclip'
 gem 'aws-sdk', '< 2.0'
 gem 'acts_as_votable', '~> 0.10.0'
+gem 'rails_cleaner', '~> 0.0.6'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
