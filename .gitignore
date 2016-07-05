@@ -16,3 +16,4 @@
 .env
 .byebug_history
 .rails_cleaner
+coverage
