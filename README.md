@@ -4,6 +4,9 @@ Makers Academy Week 7 Weekend Challenge
 
 Build an Instagram clone using Rails.
 
+[![Build Status](https://travis-ci.org/harrim91/instagram-challenge.svg?branch=master)](https://travis-ci.org/harrim91/instagram-challenge)
+[![Coverage Status](https://coveralls.io/repos/github/harrim91/instagram-challenge/badge.svg?branch=master)](https://coveralls.io/github/harrim91/instagram-challenge?branch=master)
+
 Users can create an account, sign in and log out (using Devise)
 Users must be logged in to access any functionality.
 Users can perform CRUD actions on photos.
