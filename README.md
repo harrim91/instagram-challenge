@@ -7,6 +7,17 @@ Build an Instagram clone using Rails.
 [![Build Status](https://travis-ci.org/harrim91/instagram-challenge.svg?branch=master)](https://travis-ci.org/harrim91/instagram-challenge)
 [![Coverage Status](https://coveralls.io/repos/github/harrim91/instagram-challenge/badge.svg?branch=master)](https://coveralls.io/github/harrim91/instagram-challenge?branch=master)
 
+Installation etc
+
+Clone this repo `git clone git@github.com:harrim91/instagram-challenge.git`
+`cd instagram-challenge`
+Run bundle to install dependencies `bundle install`
+Create your databases - `bin/rake db:create` and `bin/rake db:create RAILS_ENV=test`
+Migrate your databases - `bin/rake db:migrate` and `bin/rake db:migrate RAILS_ENV=test`
+To run the local server - `bin/rails s`
+To run the tests, run `rspec`
+
+
 Users can create an account, sign in and log out (using [Devise](https://github.com/plataformatec/devise))  
 Users must be logged in to access any functionality.  
 Users can perform CRUD actions on photos.  
